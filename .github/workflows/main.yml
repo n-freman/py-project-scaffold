@@ -1,0 +1,23 @@
+name: Python application test with Github Actions
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checout@v2
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.11
+      - name: Install dependencies
+        run: |
+          make install
+      - name: Lint with PyLint
+        run: |
+          make lint
+      - name: Test wiht Pytest
+        run: |
+          make test
+      - name: Format code with Python black
+        run: |
+          make format
